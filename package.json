@@ -1,0 +1,26 @@
+{
+  "name": "webgl",
+  "version": "1.0.0",
+  "description": "webgl",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melodyVoid/webgl.git"
+  },
+  "keywords": [
+    "webgl"
+  ],
+  "author": "Botao <botaoxyz@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/melodyVoid/webgl/issues"
+  },
+  "homepage": "https://github.com/melodyVoid/webgl#readme"
+}
