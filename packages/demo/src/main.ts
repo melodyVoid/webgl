@@ -1,4 +1,5 @@
-import { getWebGLContext, createShader, createProgram } from '@webgl/utils'
+import { getWebGLContext, createShader, createProgram, randomColor } from '@3dgl/utils'
+import './style.css'
 
 /**
  * 获取 canvas 元素
@@ -18,6 +19,7 @@ const VERTEX_SHADER_SOURCE = `
   attribute vec2 a_Position;
   attribute vec2 a_Screen_Size;
   void main() {
+    
     vec2 position = (a_Position / a_Screen_Size) * 2.0 - 1.0;
     position = position * vec2(1.0, -1.0);
     gl_Position = vec4(position, 0.0, 1.0);
@@ -86,9 +88,10 @@ const points: Array<{
 }> = []
 
 canvas.addEventListener('click', e => {
-  const x = e.pageX
-  const y = e.pageY
-  const color = { r: 255, g: 0, b: 0, a: 1 }
+  console.log(e)
+  const x = e.offsetX
+  const y = e.offsetY
+  const color = randomColor()
   points.push({ x, y, color })
   // 绘制前清空屏幕
   gl.clear(gl.COLOR_BUFFER_BIT)

@@ -1,7 +1,7 @@
 {
-  "name": "@webgl/utils",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@3dgl/utils",
+  "version": "1.0.2",
+  "private": false,
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,9 +10,11 @@
     "build": "tsc",
     "watch": "tsc --watch"
   },
-  "author": "",
+  "author": "Botao <botaoxyz@gmail.com>",
   "license": "ISC",
-  "dependencies": {
+  "keywords": [],
+  "description": "",
+  "devDependencies": {
     "typescript": "^4.4.2"
   }
 }

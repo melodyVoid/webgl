@@ -1,7 +1,9 @@
 /**
  * 获取 WebGL 绘制上下文对象
  */
-export const getWebGLContext = (element: HTMLElement | null) => {
+export const getWebGLContext = (
+  element: HTMLElement | null
+): WebGLRenderingContext => {
   if (element === null) {
     throw new Error('element is null')
   }
@@ -20,7 +22,7 @@ export const createShader = (
   gl: WebGLRenderingContext,
   type: number,
   source: string
-) => {
+): WebGLShader => {
   const shader = gl.createShader(type)
   if (shader === null) {
     throw new Error('fail to createShader')
@@ -45,7 +47,7 @@ export const createProgram = (
   gl: WebGLRenderingContext,
   vertexShader: WebGLShader,
   fragShader: WebGLShader
-) => {
+): { program: WebGLProgram } => {
   // 创建程序
   const program = gl.createProgram()
 
@@ -60,7 +62,7 @@ export const createProgram = (
   // 链接程序
   gl.linkProgram(program)
 
-	// 是否链接成功
+  // 是否链接成功
   const success = gl.getProgramParameter(program, gl.LINK_STATUS)
 
   if (success) {
@@ -68,8 +70,25 @@ export const createProgram = (
       program,
     }
   }
-	// 链接失败
+  // 链接失败
   const errorLog = gl.getProgramInfoLog(program)
   gl.deleteProgram(program)
   throw errorLog
+}
+
+/**
+ * 生成随机色
+ */
+export const randomColor = () => {
+  // 生成 [0, 255] 的随机整数
+  const min = 0
+  const max = 255
+  const random = () => Math.floor(Math.random() * (max - min) + 1) + min
+
+  return {
+    r: random(),
+    g: random(),
+    b: random(),
+    a: 1, // alpha，要不然容易出现白点过多的情况
+  }
 }
