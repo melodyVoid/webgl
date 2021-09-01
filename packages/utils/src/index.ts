@@ -92,3 +92,50 @@ export const randomColor = () => {
     a: 1, // alpha，要不然容易出现白点过多的情况
   }
 }
+
+/**
+ * 创建 buffer
+ */
+export interface VertexAttribPointerOptions {
+  /**
+   * 每次取几个数据
+   */
+  size: number
+  /**
+   * 数据类型，一般为 gl.Float
+   */
+  type?: number
+  /**
+   * 是否需要归一化
+   */
+  normalized?: boolean
+  /**
+   * 每次迭代运行需要移动数据数 * 每个数据所占内存 到下一个数据开始点。
+   */
+  stride?: number
+  /**
+   * 从缓冲位置偏移量
+   */
+  offset?: number
+}
+export const createBuffer = (
+  gl: WebGLRenderingContext,
+  attribute: number,
+  vertexAttribPointer: VertexAttribPointerOptions
+) => {
+  const {
+    size,
+    type = gl.FLOAT,
+    normalized = false,
+    stride = 0,
+    offset = 0,
+  } = vertexAttribPointer
+
+  const buffer = gl.createBuffer()
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+
+  gl.vertexAttribPointer(attribute, size, type, normalized, stride, offset)
+  gl.enableVertexAttribArray(attribute)
+
+  return buffer
+}
