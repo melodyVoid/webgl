@@ -139,3 +139,55 @@ export const createBuffer = (
 
   return buffer
 }
+
+/**
+ * 加载纹理
+ */
+export const loadTexture = (
+  gl: WebGLRenderingContext,
+  src: string,
+  attribute: WebGLUniformLocation | null,
+  callback: () => void
+) => {
+  /**
+   * 加载图片
+   */
+  const img = new Image()
+  img.src = src
+  img.crossOrigin = 'anonymous'
+
+  img.onload = () => {
+    /**
+     * 激活 0 号纹理通道 gl.TEXTURE0
+     */
+    gl.activeTexture(gl.TEXTURE0)
+
+    /**
+     * 创建纹理对象
+     */
+    const texture = gl.createTexture()
+
+    /**
+     * 绑定纹理对象到当前纹理绑定点(gl.TEXTURE_2D)上
+     */
+    gl.bindTexture(gl.TEXTURE_2D, texture)
+    /**
+     * 为片元着色器传递图片数据
+     */
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img)
+    /**
+     * 置图片在放大或者缩小时采用的算法 gl.LINEAR
+     */
+    gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
+    gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+
+    /**
+     * 为片元着色器传递 0 号纹理单元
+     */
+    gl.uniform1i(attribute, 0)
+    /**
+     * 执行回调
+     */
+    callback?.()
+  }
+}
