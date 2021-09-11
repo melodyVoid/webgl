@@ -1,0 +1,20 @@
+{
+  "name": "@3dgl/matrix",
+  "version": "1.0.0",
+  "private": false,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "author": "Botao <botaoxyz@gmail.com>",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "devDependencies": {
+    "typescript": "^4.4.2"
+  }
+}
